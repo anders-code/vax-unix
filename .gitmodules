@@ -1,0 +1,12 @@
+[submodule "simh"]
+	path = simh
+	url = https://github.com/simh/simh
+	branch = master
+[submodule "simhtools"]
+	path = simhtools
+	url = https://github.com/simh/simtools.git
+	branch = master
+[submodule "4.3BSD-dist"]
+	path = 4.3BSD-dist
+	url = https://github.com/anders-code/4.3BSD-dist
+	branch = master
