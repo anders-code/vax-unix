@@ -1,1 +1,3 @@
-/.simh-makefile-patch.mk
+*.swp
+*.dsk
+*.toy

@@ -31,21 +31,15 @@ $(SUBMODULES:%=%/.git):
 
 simh-big4: $(SIMH_BIG4_PATHS)
 
-$(SIMH_BIG4_PATHS): .simh-makefile-patch.mk $(SIMH_BUILDROMS) | simh/.git
-	#$(MAKE) -C simh TESTS=0 $(@:simh/BIN/%=%)
-	$(MAKE) -C simh -f ../.simh-makefile-patch.mk TESTS=0 $(@:simh/BIN/%=%)
+$(SIMH_BIG4_PATHS): $(SIMH_BUILDROMS) | simh/.git
+	$(MAKE) -C simh TESTS=0 $(@:simh/BIN/%=%)
 
 # this needs to be build separately at the top level so that make -j8 works
-$(SIMH_BUILDROMS): .simh-makefile-patch.mk | simh/.git
-	#$(MAKE) -C simh TESTS=0 $(@:simh/%=%)
-	$(MAKE) -C simh -f ../.simh-makefile-patch.mk TESTS=0 $(@:simh/%=%)
+$(SIMH_BUILDROMS): | simh/.git
+	$(MAKE) -C simh TESTS=0 $(@:simh/%=%)
 
 simh-tools: $(SIMH_TOOLS_PATHS)
 
 $(SIMH_TOOLS_PATHS): | simhtools/.git
 	$(MAKE) -C $(dir $@)
-
-# fix HORRIBLE TERRIBLE simh makefile issue
-.simh-makefile-patch.mk: | simh/.git
-	sed -e 's?-d ./.git?-e ./.git?' simh/makefile > "$@"
 
